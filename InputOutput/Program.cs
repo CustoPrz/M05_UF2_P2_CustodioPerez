@@ -11,12 +11,12 @@ namespace InputOutput
             {
                 Console.WriteLine("Please write yes/no");
                 string response = Console.ReadLine().ToLower();
-                if (response[0] == 'y')
+                if (response == "yes")
                 {
                     Console.WriteLine("Hello world");
                     running = false;
                 }
-                else if (response[0] = 'n')
+                else if (response == "no")
                 {
                     Console.WriteLine("Goodbye world");
                     running = false;

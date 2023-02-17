@@ -12,7 +12,7 @@ namespace Tests
         {
             //Arrange
             List<float> numbers = new List<float>();
-            for (int i = 0; i < Utils.random.Next() % 100; i++)
+            for (int i = 0; i < Utils.random.Next(10,1000); i++)
             {
                 numbers.Add(Utils.random.Next() % 100);
             }
