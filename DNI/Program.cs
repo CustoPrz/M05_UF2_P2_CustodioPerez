@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DNI
 {
@@ -18,7 +19,10 @@ namespace DNI
         /// <returns></returns>
         public static char LetterNIF(int number)
         {
-            return '-';
+            int lettersPos;
+            string letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+            lettersPos = number % 23;
+            return letters[lettersPos];
         }
     }
 }

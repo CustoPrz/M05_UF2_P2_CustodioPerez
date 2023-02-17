@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace DayOfTheWeek
 {
@@ -28,8 +29,9 @@ namespace DayOfTheWeek
         }
         public static int DayOfTheWeek(int year, int month, int day)
         {
-            //TODO
-            return -1;
+            DateTime fecha = new DateTime(year, month, day);
+            int diasemana = (int)fecha.DayOfWeek;
+            return diasemana;
         }
     }
 }
