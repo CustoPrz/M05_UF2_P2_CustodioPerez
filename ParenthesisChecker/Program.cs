@@ -10,13 +10,14 @@ namespace ParenthesisChecker
             string response = Console.ReadLine();
             int open = CountChars(response, '(');
             int close = CountChars(response, ')');
-            if(open == close)
+            bool firstandlast = FirstAndLast(response);
+            if(open == close && firstandlast)
             {
-                Console.WriteLine("The parenthesis don't close");
+                Console.WriteLine("The parenthesis close");
             }
             else
             {
-                Console.WriteLine("The parenthesis close");
+                Console.WriteLine("The parenthesis don't close");
             }
         }
         public static int CountChars(string text, char search)
@@ -28,6 +29,17 @@ namespace ParenthesisChecker
                     amount++;
             }
             return amount;
+        }
+        public static bool FirstAndLast(string text)
+        {
+            if (text[0] == '(' && text[text.Length-1] == ')')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
