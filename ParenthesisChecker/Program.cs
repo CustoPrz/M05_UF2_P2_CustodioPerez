@@ -6,6 +6,7 @@ namespace ParenthesisChecker
     public class Program
     {
         static void Main(string[] args)
+        
         {
             Console.WriteLine("Please write a text with parenthesis");
             string response = Console.ReadLine();
@@ -58,5 +59,6 @@ namespace ParenthesisChecker
             }
             return stack.Count == 0;
         }
+
     }
 }

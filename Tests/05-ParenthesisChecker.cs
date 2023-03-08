@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Tests
 {
@@ -24,16 +26,37 @@ namespace Tests
                 }
             }
             string original = sb.ToString();
-            bool resultOK = false;
-            if (original[0] == '(' && original.Length % 2 == 0)
+            bool resultOK = true;
+            Stack<char> stack = new Stack<char>();
+            foreach (char c in original)
             {
-                int countOpen = original.Count(c => c == '(');
-                int countClose = original.Count(c => c == ')');
-                resultOK = countOpen == countClose;
+                if (c == '(')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')')
+                {
+                    if (stack.Count == 0)
+                    {
+                        resultOK = false;
+                        break; // Salir del ciclo para evitar errores adicionales
+                    }
+                    char last = stack.Pop();
+                    if (c == ')' && last != '(')
+                    {
+                        resultOK = false;
+                        break; // Salir del ciclo para evitar errores adicionales
+                    }
+                }
             }
+            if (stack.Count != 0)
+            {
+                resultOK = false;
+            }
+
             bool result = false;
             //Act
-            result = ParenthesisChecker.Program.CountChars(original, ')') == ParenthesisChecker.Program.CountChars(original, '(');
+            result = ParenthesisChecker.Program.Valid(original);
             //Assert
             Assert.AreEqual(resultOK, result);
         }
