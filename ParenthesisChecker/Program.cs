@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ParenthesisChecker
 {
@@ -10,7 +11,7 @@ namespace ParenthesisChecker
             string response = Console.ReadLine();
             int open = CountChars(response, '(');
             int close = CountChars(response, ')');
-            bool firstandlast = FirstAndLast(response);
+            bool firstandlast = Valid(response);
             if(open == close && firstandlast)
             {
                 Console.WriteLine("The parenthesis close");
@@ -30,16 +31,32 @@ namespace ParenthesisChecker
             }
             return amount;
         }
-        public static bool FirstAndLast(string text)
+        public static bool Valid(string text)
         {
-            if (text[0] == '(' && text[text.Length-1] == ')')
+            Stack<char> stack = new Stack<char>();
+        
+            foreach (char c in text)
             {
-                return true;
+                if (c == '(')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')')
+                {
+                    if (stack.Count == 0)
+                    {
+                        return false;
+                    }
+                    char last = stack.Pop();
+                    if (c == ')' && last != '(')
+                    {
+                        return false;
+                    }
+
+
+                }
             }
-            else
-            {
-                return false;
-            }
+            return stack.Count == 0;
         }
     }
 }
