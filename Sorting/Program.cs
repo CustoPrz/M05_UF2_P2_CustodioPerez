@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sorting
 {
@@ -11,7 +12,7 @@ namespace Sorting
             List<int> list = new List<int>(100);
             for (int i = 0; i < 100; i++)
             {
-                list.Add(Utils.random.Next());
+                list.Add(Utils.random.Next(100));
                 Console.WriteLine(list[i]);
             }
 
@@ -25,7 +26,24 @@ namespace Sorting
 
         static public List<int> Sort(List<int> list)
         {
-            return list;
+            List<int> numeros = new List<int>(100);
+            numeros = list;
+
+
+            for (int i = 0; i < numeros.Count; i++)
+            {
+                for (int j = 0; j < numeros.Count - 1; j++)
+                {
+                    if (numeros[j] > numeros[j + 1])
+                    {
+                        int temp = numeros[j + 1];
+                        numeros[j + 1] = numeros[j];
+                        numeros[j] = temp;
+                    }
+                }
+            }
+
+            return numeros;
         }
     }
 }
